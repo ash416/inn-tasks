@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static part1.lesson10.server.ClientHandler.QUIT_MESSAGE;
+import static part1.lesson10.server.utils.ChatMessagesUtil.QUIT_MESSAGE;
 
 public class Sender extends Thread {
     private BufferedWriter writer;
