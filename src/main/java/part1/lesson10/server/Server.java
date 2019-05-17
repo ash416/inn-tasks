@@ -1,7 +1,5 @@
 package part1.lesson10.server;
 
-import part1.lesson10.ClientHandler;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -35,11 +33,19 @@ public class Server {
         });
     }
 
-    public static void removeFromChat(ClientHandler client) {
+    public void sendMessageToAllClientsExcept(String message, ClientHandler client) {
+        clients.forEach(clientHandler -> {
+            if (!client.equals(clientHandler)) {
+                clientHandler.sendMessage(message);
+            }
+        });
+    }
+
+    public void removeFromChat(ClientHandler client) {
         clients.remove(client);
     }
 
-    public void sendMessageToClient(ClientHandler client, String message) {
+    public void sendMessageToClient(String message, ClientHandler client) {
         client.sendMessage(message);
     }
 }

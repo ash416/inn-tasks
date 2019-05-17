@@ -2,23 +2,24 @@ package part1.lesson10.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 public class Listener extends Thread {
-    private Socket socket;
+    private BufferedReader reader;
 
-    public Listener(Socket socket) {
-        this.socket = socket;
+    public Listener(BufferedReader reader) {
+        this.reader = reader;
+        start();
     }
 
     @Override
     public void run() {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+        try {
             String message;
             while ((message = reader.readLine()) != null) {
                 System.out.println(message);
+                if (message.equals("Вы вышли из чата")) {
+                    break;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
