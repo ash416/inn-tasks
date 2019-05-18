@@ -6,6 +6,11 @@ import java.util.Scanner;
 
 import static part1.lesson10.server.utils.ChatMessagesUtil.QUIT_MESSAGE;
 
+/**
+ * The class reads client's messages from the console and sends its to server.
+ * If client writes 'quit', the class stops its job.
+ */
+
 public class Sender extends Thread {
     private BufferedWriter writer;
 

@@ -1,5 +1,9 @@
 package part1.lesson10.server.utils;
 
+/**
+ * The class provides chat service messages
+ */
+
 public class ChatMessagesUtil {
     public static final String NEW_USER_MESSAGE = "В чат вошел %s.";
     public static final String ENTER_MESSAGE = "Для входа в чат введите ваше имя: ";
