@@ -6,10 +6,13 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+/**
+ * The class is chat. It has clients handler list.
+ * It can send messages to client.
+ */
 
 
 public class Server {
@@ -20,8 +23,8 @@ public class Server {
 
     public Server() {
         try (ServerSocket serverSocket = new ServerSocket(SERVER_PORT)) {
+            LOGGER.info("Сервер запущен, ждет подключения клиентов");
             while (true) {
-                LOGGER.info("Сервер запущен, ждет подключения клиентов");
                 Socket clientSocket = serverSocket.accept();
                 LOGGER.info("Подключился клиент с порта {}", clientSocket.getPort());
                 ClientHandler clientHandler = new ClientHandler(clientSocket, this);
@@ -36,12 +39,21 @@ public class Server {
         Server server = new Server();
     }
 
+    /**
+     * the method sends messages to all clients is chat
+     * @param message
+     */
     public void sendMessagesToAllClients(String message) {
         clients.values().forEach(clientHandler -> {
             clientHandler.sendMessage(message);
         });
     }
 
+    /**
+     * the method sends messages to all clients from chat excepts clients who has written this message
+     * @param message
+     * @param client
+     */
     public void sendMessageToAllClientsExcept(String message, ClientHandler client) {
         clients.values().forEach(clientHandler -> {
             if (!client.equals(clientHandler)) {
@@ -51,10 +63,19 @@ public class Server {
         LOGGER.info(message);
     }
 
+    /**
+     * the method for removing client from chat
+     * @param client
+     */
     public void removeFromChat(ClientHandler client) {
-        clients.remove(client);
-        LOGGER.info("Пользователь {} вышел из чата", client.getUserName());
+        clients.remove(client.getClientName());
     }
+
+    /**
+     * the method sends message to special client
+     * @param message
+     * @param client
+     */
 
     public void sendMessageToClient(String message, ClientHandler client) {
         client.sendMessage(message);

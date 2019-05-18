@@ -3,6 +3,13 @@ package part1.lesson10.client;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import static part1.lesson10.server.utils.ChatMessagesUtil.YOU_LEFT_CHAT;
+
+/**
+ * The class receives messages from server and writes them on console.
+ * If client quits from chat, the class stops its job
+ */
+
 public class Listener extends Thread {
     private BufferedReader reader;
 
@@ -17,7 +24,7 @@ public class Listener extends Thread {
             String message;
             while ((message = reader.readLine()) != null) {
                 System.out.println(message);
-                if (message.equals("Вы вышли из чата")) {
+                if (message.equals(YOU_LEFT_CHAT)) {
                     break;
                 }
             }
