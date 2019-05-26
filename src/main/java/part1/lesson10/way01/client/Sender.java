@@ -1,10 +1,10 @@
-package part1.lesson10.client;
+package part1.lesson10.way01.client;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static part1.lesson10.server.utils.ChatMessagesUtil.QUIT_MESSAGE;
+import static part1.lesson10.way01.server.utils.ChatMessagesUtil.QUIT_MESSAGE;
 
 /**
  * The class reads client's messages from the console and sends its to server.

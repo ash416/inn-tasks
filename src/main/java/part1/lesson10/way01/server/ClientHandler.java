@@ -1,4 +1,4 @@
-package part1.lesson10.server;
+package part1.lesson10.way01.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,8 +7,8 @@ import java.io.*;
 import java.net.Socket;
 
 import static java.lang.String.format;
-import static part1.lesson10.server.utils.ChatMessagesUtil.*;
-import static part1.lesson10.server.Server.clients;
+import static part1.lesson10.way01.server.utils.ChatMessagesUtil.*;
+import static part1.lesson10.way01.server.Server.clients;
 
 /**
  * The class handles client's messages.

@@ -1,9 +1,9 @@
-package part1.lesson10.client;
+package part1.lesson10.way01.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import static part1.lesson10.server.utils.ChatMessagesUtil.YOU_LEFT_CHAT;
+import static part1.lesson10.way01.server.utils.ChatMessagesUtil.YOU_LEFT_CHAT;
 
 /**
  * The class receives messages from server and writes them on console.

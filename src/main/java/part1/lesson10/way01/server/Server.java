@@ -1,4 +1,4 @@
-package part1.lesson10.server;
+package part1.lesson10.way01.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

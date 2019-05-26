@@ -1,4 +1,4 @@
-package part1.lesson10.server.utils;
+package part1.lesson10.way01.server.utils;
 
 /**
  * The class provides chat service messages

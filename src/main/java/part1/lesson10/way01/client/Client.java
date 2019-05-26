@@ -1,6 +1,6 @@
-package part1.lesson10.client;
+package part1.lesson10.way01.client;
 
-import part1.lesson10.server.Server;
+import part1.lesson10.way01.server.Server;
 
 import java.io.*;
 import java.net.Socket;
