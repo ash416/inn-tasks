@@ -1,0 +1,72 @@
+package part1.lesson15;
+
+import part1.lesson15.model.Role;
+import part1.lesson15.model.User;
+
+import java.sql.*;
+
+import static java.lang.String.format;
+
+/**
+ * The class for inserting elements into three table: user, role and user_role without auto commit
+ */
+
+public class TransactionManager {
+
+    /**
+     * The method inserts data in tables. Firstly it inserts user, than role, tham user_role.
+     * If some execution throws an exception, the transaction refuses to the previously savepoint
+     * @param user
+     * @param role
+     * @param userRoleId
+     * @param connection
+     * @throws SQLException
+     */
+
+    public static void insertToTables(User user, Role role, Integer userRoleId, Connection connection) throws SQLException {
+        connection.setAutoCommit(false);
+        Statement statement = connection.createStatement();
+
+        statement.executeUpdate(getInsertUserQuery(user));
+        Savepoint userSavePoint = connection.setSavepoint();
+        Savepoint roleSavePoint = null;
+        try {
+            statement.executeUpdate(getInsertRoleQuery(role));
+            roleSavePoint = connection.setSavepoint();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            if (userSavePoint != null) {
+                connection.rollback(userSavePoint);
+            }
+        }
+        try {
+            statement.executeUpdate(getInsertUserRoleQuery(userRoleId, user.getId(), role.getId()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            if (roleSavePoint != null) {
+                connection.rollback(roleSavePoint);
+            }
+        }
+        connection.commit();
+        connection.setAutoCommit(true);
+    }
+
+    private static String getInsertUserQuery(User user) {
+        return format("INSERT INTO users (id, name, birthday, login_ID, city, email, description)" +
+                        "VALUES (%d, '%s', '%s', '%s', '%s', '%s', '%s')", user.getId(), user.getName(),
+                Date.valueOf(user.getBirthdate()), user.getLoginId(), user.getCity(), user.getEmail(), user.getDescription());
+    }
+
+    private static String getInsertRoleQuery(Role role) {
+        return format("INSERT INTO ROLE (id, name, description) VALUES (%s, '%s', '%s')",
+                role.getId(), role.getName(), role.getDescription());
+    }
+
+    private static String getInsertUserRoleQuery(Integer userRoleId, Integer userId, Integer roleId) {
+        return format("INSERT INTO user_role (id, user_id, role_id) VALUES (%s, %s, %s)",
+                userRoleId, userId, roleId);
+    }
+
+
+}
+
