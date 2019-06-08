@@ -19,7 +19,7 @@ public class UserDbDesigner {
     private Statement statement;
 
     public UserDbDesigner() {
-        try (InputStream inputStream = UserDbDesigner.class.getClassLoader().getResourceAsStream("config/application.properties")) {
+        try (InputStream inputStream = UserDbDesigner.class.getClassLoader().getResourceAsStream("application.properties")) {
             Properties properties = new Properties();
             properties.load(inputStream);
             Class.forName(properties.getProperty("database.driver"));

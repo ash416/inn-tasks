@@ -1,5 +1,7 @@
 package part1.lesson15;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import part1.lesson15.model.User;
 
 import java.sql.*;
@@ -10,6 +12,7 @@ import static java.lang.String.format;
 
 public class UserRepository {
 
+    private static final Logger LOGGER = LogManager.getLogger(UserRepository.class);
     private Connection connection;
 
     public UserRepository(Connection connection) {
@@ -17,6 +20,7 @@ public class UserRepository {
     }
 
     public void insertIntoTheTable(List<User> users) throws SQLException {
+        LOGGER.info("Вставка данных в таблицу users. Количество элементов: {}", users.size());
         String sqlInsert = "INSERT INTO users (id, name, birthday, login_ID, city, email, description)" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sqlInsert);
@@ -31,12 +35,14 @@ public class UserRepository {
                 statement.setString(7, user.getDescription());
                 statement.execute();
             } catch (SQLException e) {
+                LOGGER.error("Ошибка при получение результата из result set: {}", e);
                 e.printStackTrace();
             }
         });
     }
 
     public void insertBatchIntoTheTable(List<User> users) throws SQLException {
+        LOGGER.info("Вставка данных в таблицу users. Количесство элементов: {}", users.size());
         String sqlInsert = "INSERT INTO users (id, name, birthday, login_ID, city, email, description)" +
                 "VALUES (%d, '%s', '%s', '%s', '%s', '%s', '%s')";
         Statement statement = connection.createStatement();
@@ -45,6 +51,7 @@ public class UserRepository {
                 statement.addBatch(format(sqlInsert, user.getId(), user.getName(), Date.valueOf(user.getBirthdate()),
                         user.getLoginId(), user.getCity(), user.getEmail(), user.getDescription()));
             } catch (SQLException e) {
+                LOGGER.error("Ошибка во время добавления batch элемента {}", user);
                 e.printStackTrace();
             }
         });
@@ -52,6 +59,7 @@ public class UserRepository {
     }
 
     public List<User> selectByLoginIdAndName(String loginId, String name) {
+        LOGGER.info("Выбор элементов из таблицы user c loginId = {} и name = {}", loginId, name);
         String sqlSelect = "SELECT * FROM users WHERE login_ID = ? AND name = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sqlSelect);
@@ -64,6 +72,7 @@ public class UserRepository {
             }
             return users;
         } catch (SQLException e) {
+            LOGGER.error("Ошибка при получении элементов: {}", e);
             e.printStackTrace();
         }
         return null;

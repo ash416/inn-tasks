@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Appenders>
+        <JDBC name="databaseAppender" tableName="logs">
+            <ConnectionFactory class="part1.lesson15.ConnectionFactory" method="getDatabaseConnection" />
+            <Column name="log_date" isEventTimestamp="true" />
+            <Column name="log_level" pattern="%level" isUnicode="false"/>
+            <Column name="message" pattern="%message" isUnicode="false"/>
+            <Column name="log_exception" pattern="%ex{full}" isUnicode="false"/>
+        </JDBC>
+    </Appenders>
+
+    <Loggers>
+        <Logger name= "part1.lesson15.UserRepository" level="debug" additivity="true">
+            <AppenderRef ref="databaseAppender"/>
+        </Logger>
+
+        <!-- Root Logger -->
+        <Root level="all">
+            <AppenderRef ref="databaseAppender"/>
+        </Root>
+    </Loggers>
+
+
+</Configuration>
