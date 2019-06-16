@@ -1,6 +1,5 @@
-package ru.inno.stc14.entity;
+package part1.lesson22.entity;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class Person {

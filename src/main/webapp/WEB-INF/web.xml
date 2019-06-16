@@ -17,42 +17,6 @@
         <param-value>jdbc:h2:mem:students</param-value>
     </context-param>
 
-    <listener>
-        <listener-class>ru.inno.stc14.servlet.AppContextListener</listener-class>
-    </listener>
-
-    <servlet>
-        <servlet-name>person</servlet-name>
-        <servlet-class>ru.inno.stc14.servlet.PersonServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>person</servlet-name>
-        <url-pattern>/person</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>personList</servlet-name>
-        <servlet-class>ru.inno.stc14.servlet.ListPersonServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>personList</servlet-name>
-        <url-pattern>/person/list</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>errorHandler</servlet-name>
-        <servlet-class>ru.inno.stc14.servlet.AppErrorHandler</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>errorHandler</servlet-name>
-        <url-pattern>/error</url-pattern>
-    </servlet-mapping>
-
     <error-page>
         <error-code>404</error-code>
         <location>/error</location>
@@ -61,16 +25,6 @@
         <exception-type>java.lang.Throwable</exception-type>
         <location>/error</location>
     </error-page>
-
-    <filter>
-        <filter-name>logFilter</filter-name>
-        <filter-class>ru.inno.stc14.servlet.LogFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>logFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
 
     <jsp-config>
         <taglib>

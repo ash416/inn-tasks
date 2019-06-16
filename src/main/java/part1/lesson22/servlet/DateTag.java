@@ -1,4 +1,4 @@
-package ru.inno.stc14.servlet;
+package part1.lesson22.servlet;
 
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;

@@ -1,6 +1,6 @@
-package ru.inno.stc14.service;
+package part1.lesson22.service;
 
-import ru.inno.stc14.entity.Person;
+import part1.lesson22.entity.Person;
 
 import java.io.IOException;
 import java.util.List;

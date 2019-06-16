@@ -1,8 +1,8 @@
-package ru.inno.stc14.service;
+package part1.lesson22.service;
 
-import ru.inno.stc14.dao.PersonDAO;
-import ru.inno.stc14.dao.jdbc.PersonDAOImpl;
-import ru.inno.stc14.entity.Person;
+import part1.lesson22.dao.PersonDAO;
+import part1.lesson22.dao.jdbc.PersonDAOImpl;
+import part1.lesson22.entity.Person;
 
 import java.io.IOException;
 import java.sql.Connection;

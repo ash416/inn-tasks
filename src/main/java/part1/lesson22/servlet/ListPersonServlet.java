@@ -1,10 +1,11 @@
-package ru.inno.stc14.servlet;
+package part1.lesson22.servlet;
 
-import ru.inno.stc14.entity.Person;
-import ru.inno.stc14.service.PersonService;
-import ru.inno.stc14.service.PersonServiceImpl;
+import part1.lesson22.entity.Person;
+import part1.lesson22.service.PersonService;
+import part1.lesson22.service.PersonServiceImpl;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
+@WebServlet("/person/list")
 public class ListPersonServlet extends HttpServlet {
     private PersonService person;
 

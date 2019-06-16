@@ -1,14 +1,10 @@
-package ru.inno.stc14.dao.jdbc;
+package part1.lesson22.dao.jdbc;
 
-import ru.inno.stc14.dao.PersonDAO;
-import ru.inno.stc14.entity.Person;
+import part1.lesson22.dao.PersonDAO;
+import part1.lesson22.entity.Person;
 
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

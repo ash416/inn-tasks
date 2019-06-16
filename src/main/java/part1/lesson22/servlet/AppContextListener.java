@@ -1,16 +1,18 @@
-package ru.inno.stc14.servlet;
+package part1.lesson22.servlet;
 
-import ru.inno.stc14.dao.ConnectionManager;
-import ru.inno.stc14.dao.jdbc.DBConnectionManager;
+import part1.lesson22.dao.jdbc.DBConnectionManager;
+import part1.lesson22.dao.ConnectionManager;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@WebListener
 public class AppContextListener implements ServletContextListener {
     private Logger logger = Logger.getLogger(AppContextListener.class.getName());
     @Override
@@ -20,7 +22,6 @@ public class AppContextListener implements ServletContextListener {
         String dbURL = ctx.getInitParameter("dbURL");
         String user = ctx.getInitParameter("dbUser");
         String pwd = ctx.getInitParameter("dbPassword");
-
         try {
             final String dbInit = ";INIT=RUNSCRIPT FROM '" + ctx.getRealPath("/db/data.sql").replace("\\", "/") + "';";
             ConnectionManager connectionManager = new DBConnectionManager(dbURL + dbInit, user, pwd);

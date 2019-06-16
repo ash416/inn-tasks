@@ -1,6 +1,6 @@
-package ru.inno.stc14.dao.jdbc;
+package part1.lesson22.dao.jdbc;
 
-import ru.inno.stc14.dao.ConnectionManager;
+import part1.lesson22.dao.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

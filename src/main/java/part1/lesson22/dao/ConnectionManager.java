@@ -1,4 +1,4 @@
-package ru.inno.stc14.dao;
+package part1.lesson22.dao;
 
 import java.sql.Connection;
 

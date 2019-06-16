@@ -1,6 +1,6 @@
-package ru.inno.stc14.dao;
+package part1.lesson22.dao;
 
-import ru.inno.stc14.entity.Person;
+import part1.lesson22.entity.Person;
 
 import java.util.List;
 
