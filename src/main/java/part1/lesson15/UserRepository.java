@@ -36,7 +36,6 @@ public class UserRepository {
                 statement.execute();
             } catch (SQLException e) {
                 LOGGER.error("Ошибка при получение результата из result set: {}", e);
-                e.printStackTrace();
             }
         });
     }
@@ -52,7 +51,6 @@ public class UserRepository {
                         user.getLoginId(), user.getCity(), user.getEmail(), user.getDescription()));
             } catch (SQLException e) {
                 LOGGER.error("Ошибка во время добавления batch элемента {}", user);
-                e.printStackTrace();
             }
         });
         statement.executeBatch();
@@ -73,7 +71,6 @@ public class UserRepository {
             return users;
         } catch (SQLException e) {
             LOGGER.error("Ошибка при получении элементов: {}", e);
-            e.printStackTrace();
         }
         return null;
     }

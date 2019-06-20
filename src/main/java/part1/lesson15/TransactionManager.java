@@ -1,5 +1,7 @@
 package part1.lesson15;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import part1.lesson15.model.Role;
 import part1.lesson15.model.User;
 
@@ -12,6 +14,7 @@ import static java.lang.String.format;
  */
 
 public class TransactionManager {
+    private static final Logger LOGGER = LogManager.getLogger(TransactionManager.class);
 
     /**
      * The method inserts data in tables. Firstly it inserts user, than role, tham user_role.
@@ -24,30 +27,34 @@ public class TransactionManager {
      */
 
     public static void insertToTables(User user, Role role, Integer userRoleId, Connection connection) throws SQLException {
+        LOGGER.info("Вставка в таблицу данных в ручной транзакции");
         connection.setAutoCommit(false);
         Statement statement = connection.createStatement();
-
+        LOGGER.info("Вставка данных в таблицу user");
         statement.executeUpdate(getInsertUserQuery(user));
         Savepoint userSavePoint = connection.setSavepoint();
         Savepoint roleSavePoint = null;
         try {
+            LOGGER.info("Вставка данных в таблицу role");
             statement.executeUpdate(getInsertRoleQuery(role));
             roleSavePoint = connection.setSavepoint();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Не удалось вставить данные в таблицу role", e);
             if (userSavePoint != null) {
                 connection.rollback(userSavePoint);
             }
         }
         try {
+            LOGGER.info("Вставка в таблицу user_role");
             statement.executeUpdate(getInsertUserRoleQuery(userRoleId, user.getId(), role.getId()));
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Не удалось вставить данные в таблицу user_role", e);
             if (roleSavePoint != null) {
                 connection.rollback(roleSavePoint);
             }
         }
         connection.commit();
+        LOGGER.info("Вставка в таблицы завершена");
         connection.setAutoCommit(true);
     }
 

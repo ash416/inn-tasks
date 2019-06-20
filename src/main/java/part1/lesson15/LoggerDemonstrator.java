@@ -1,5 +1,7 @@
 package part1.lesson15;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import part1.lesson15.model.User;
 
 import java.io.IOException;
@@ -7,13 +9,14 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
 public class LoggerDemonstrator {
+    private static final Logger LOGGER = LogManager.getLogger(LoggerDemonstrator.class);
+
 
     private Connection connection;
 
@@ -31,6 +34,7 @@ public class LoggerDemonstrator {
     }
 
     void demonstrate() throws SQLException {
+        LOGGER.info("Демонстрация логирования в базу данных");
         UserRepository repository = new UserRepository(connection);
         List<User> user = Arrays.asList(new User(1, "name1", LocalDate.now(),
                 "login_id1", "email1", "city1", "description1"));
